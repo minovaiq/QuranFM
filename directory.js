@@ -15,3 +15,5 @@ async function load(){try{const d=await json('https://www.mp3quran.net/api/v3/re
 async function read(){const box=document.getElementById('pageVerses');if(!box)return;try{const d=await json('https://api.alquran.cloud/v1/surah/'+surah+'/quran-uthmani');if(!Array.isArray(d.data?.ayahs)||!d.data.ayahs.length)throw Error('empty');box.replaceChildren();for(const a of d.data.ayahs){const v=document.createElement('div');v.className='verse';v.textContent=a.text+' ';const num=document.createElement('small');num.textContent='﴿'+a.numberInSurah+'﴾';v.append(num);box.append(v)}}catch{box.textContent='تعذر تحميل النص من المصدر. أعد تحميل الصفحة.'}}
 load();if(surah)read();
 })();
+
+;(()=>{const links=document.querySelector('footer .foot');if(links&&!links.querySelector('a[href="/guide"]')){const d=document.createElement('div');for(const [href,label] of [['/about','عن QuranFM'],['/guide','دليل الاستخدام'],['/contact','اتصل بنا']]){const a=document.createElement('a');a.href=href;a.textContent=label;d.append(a)}links.append(d)}const s=document.createElement('script');s.src='/visitor-analytics.js';s.defer=true;document.head.append(s)})();
